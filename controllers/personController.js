@@ -21,3 +21,12 @@ const addPerson = async (req, res, next) => {
 }
 
 module.exports = addPerson;
+
+/*
+{
+    "id":"0",
+    "username":"SahilVelhal",
+    "password":"Pass@1234",
+    "role":1
+}
+*/
