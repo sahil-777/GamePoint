@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 app.use('/api', personRoutes.routes);
 
-
+const activityRoutes = require('./routes/activity-routes.js');
+app.use('/api',activityRoutes.routes);
 
 app.listen(config.port, () => console.log('App is listening on url http://localhost:' + config.port));

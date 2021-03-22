@@ -1,9 +1,8 @@
 const express = require('express');
-const addPerson = require('../controllers/personController');
+const logintoAccount = require('../controllers/activityController');
 const router = express.Router();
 
-router.post('/person/:role', addPerson);
-
+router.post('/login',logintoAccount);
 
 module.exports = {
     routes: router
