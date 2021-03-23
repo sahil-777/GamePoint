@@ -8,11 +8,9 @@ const login = async (req, res, next) => {
     try {
         const data = req.body;
         console.log(data);
-        let query =await firestore.collection('person').where('username', '==', data.username);
-        query.get().then(querySnapshot => {
-            if(querySnapshot.empty){
+            if(data.username!="person" || data.password!="pass@1234"){
                 console.log('Person Not found!');
-                res.send('Incorrect username!');
+                res.send('Incorrect username/password!');
             }
             else{
                 let loginData={
@@ -21,12 +19,14 @@ const login = async (req, res, next) => {
                     "role":req.params.role
                 }
                 console.log("LoggedIn Data => ", loginData );
-                firestore.collection('activity').doc().set(loginData);
-                res.send('Activity-Added/Loggedin Successfully!');
+                await firestore.collection('activity').doc().set(loginData);
+                if(req.params.role==1)
+                res.redirect('/admin');
+                else
+                res.redirect('/client');
+                //res.send('Activity-Added/Loggedin Successfully!');
             }
-             
-        });
-        //console.log(a);
+ 
         
     } catch (error) {
         res.status(400).send(error.message);
