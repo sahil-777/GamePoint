@@ -8,5 +8,12 @@
 </head>
 <body>
     <h1>Admin</h1>
+    <h2>Online Users </h2>
+    <% if(ActiveClients.length == 0){ %>
+        <p>No client active!</p>
+    <% } %>
+    <% for(var i=0; i < ActiveClients.length; i++) { %>
+        <p><%= ActiveClients[i].id %></p>
+    <% } %>
 </body>
 </html>

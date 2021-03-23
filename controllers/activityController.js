@@ -47,7 +47,30 @@ const logoutClient = async (req, res, next) => {
         console.log(data);
         const client =  await firestore.collection('activity').doc(id);
         await client.update(data);
-        res.send('Loggedout successfuly!');        
+        res.redirect('/login');
+        //res.send('Loggedout successfuly!');        
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const getAllActive = async (req, res, next) => {
+    try {
+        const clients = await firestore.collection('activity');
+        const data = await clients.get();
+        const clientsArray = [];
+        if(data.empty) {
+            res.status(404).send('No client Active now!');
+        }else {
+            data.forEach(doc => {
+                const client ={
+                    "id":doc.data().id
+                }
+                if(doc.data().logoutime>=Date.now())// Condition for Active people at given time
+                clientsArray.push(client);
+            });
+            res.send(clientsArray);
+        }
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -56,7 +79,8 @@ const logoutClient = async (req, res, next) => {
 
 module.exports = {
     logintoAccount,
-    logoutClient
+    logoutClient,
+    getAllActive
 };
 
 /*{
@@ -65,3 +89,5 @@ module.exports = {
     "logoutime":"10",
     "role":1
 }*/
+
+ 

@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const request = require('request');
 const config = require('./config');
 const personRoutes = require('./routes/person-routes.js');
 
@@ -31,8 +32,20 @@ app.get('/',async (req, res ,next)=>{
 })
 
 app.get('/admin',async (req,res,next)=>{
-    return res.render('admin');
+    request({
+        url: 'http://localhost:8080/api/getAllActive',
+        method: 'GET',
+        json:{}
+      }, function(error, response, body){
+        if(error) res.status(400).send(error.message);
+        //console.log('error', error);
+        //console.log('response', response);
+        console.log('body=> ', body);
+        return res.render('admin',{ActiveClients:body});
+    });
+    
 })
+
 
 app.get('/client/:Id',async (req,res,next)=>{
     console.log(req.params.Id);
