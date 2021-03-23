@@ -36,5 +36,6 @@ app.get('/admin',async (req,res,next)=>{
 app.get('/client',async (req,res,next)=>{
     return res.render('client');
 })
+ 
 
 app.listen(config.port, () => console.log('App is listening on url http://localhost:' + config.port));

@@ -4,7 +4,7 @@ const firebase = require('../db');
 const firestore = firebase.firestore();
 const Activity = require('../models/activity');
  
-const login = async (req, res, next) => {
+const logintoAccount = async (req, res, next) => {
     try {
         const data = req.body;
         console.log(data);
@@ -14,26 +14,50 @@ const login = async (req, res, next) => {
             }
             else{
                 let loginData={
+                    "id":0,
                     "logintime":Date.now(),
                     "logoutime":999999999999999,
                     "role":req.params.role
                 }
-                console.log("LoggedIn Data => ", loginData );
-                await firestore.collection('activity').doc().set(loginData);
                 if(req.params.role==1)
-                res.redirect('/admin');
-                else
+                return res.redirect('/admin');
+                else{
+                
+                const docRef =await firestore.collection('activity').doc();
+                console.log("Activity Id => "+docRef.id);
+                loginData.id=docRef.id;   //  Modifying id
+                console.log("Login Person data => ", loginData);
+                await firestore.collection('activity').doc(docRef.id).set(loginData);
+                
                 res.redirect('/client');
+                }
                 //res.send('Activity-Added/Loggedin Successfully!');
             }
- 
-        
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
-module.exports = login;
+const logoutClient = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        let data={
+            "logoutime":Date.now()
+        }
+        console.log(data);
+        const client =  await firestore.collection('activity').doc(id);
+        await client.update(data);
+        res.send('Loggedout successfuly!');        
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
+module.exports = {
+    logintoAccount,
+    logoutClient
+};
 
 /*{
     "id":"108",
