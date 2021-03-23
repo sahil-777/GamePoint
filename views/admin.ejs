@@ -36,6 +36,8 @@
     
             firebase.database().ref(clientId).set(data);
         }
+
+        //firestore.collection('activity').doc()
         
     
         </script>
@@ -43,7 +45,7 @@
     <!------------------------------->
     <h1>Admin</h1>
     <h2>Online Users </h2>
-    <p><%=ActiveClients.length %></p>
+    <!--<p><%=ActiveClients.length %></p>-->
     <% if(ActiveClients.length == 0){ %>
         <p>No client active!</p>
     <% } else {%>

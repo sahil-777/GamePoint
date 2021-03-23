@@ -60,7 +60,7 @@ const getAllActive = async (req, res, next) => {
         const data = await clients.get();
         const clientsArray = [];
         if(data.empty) {
-            res.status(404).send(clientsArray,'No client Active now!');
+            res.status(404).send(clientsArray);
         }else {
             data.forEach(doc => {
                 const client ={
