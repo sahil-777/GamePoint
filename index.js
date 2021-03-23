@@ -13,8 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.set('views', __dirname + '/views');
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+//app.engine('html', require('ejs').renderFile);
+//app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 app.use('/api', personRoutes.routes);
 
@@ -33,8 +34,12 @@ app.get('/admin',async (req,res,next)=>{
     return res.render('admin');
 })
 
-app.get('/client',async (req,res,next)=>{
-    return res.render('client');
+app.get('/client/:Id',async (req,res,next)=>{
+    console.log(req.params.Id);
+    let client={
+        "Id":req.params.Id
+    };
+    return res.render('client',{client:client});
 })
  
 

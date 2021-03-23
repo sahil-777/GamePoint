@@ -28,8 +28,8 @@ const logintoAccount = async (req, res, next) => {
                 loginData.id=docRef.id;   //  Modifying id
                 console.log("Login Person data => ", loginData);
                 await firestore.collection('activity').doc(docRef.id).set(loginData);
-                
-                res.redirect('/client');
+                let Id=loginData.id;
+                res.redirect('/client/'+Id);
                 }
                 //res.send('Activity-Added/Loggedin Successfully!');
             }
