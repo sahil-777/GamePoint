@@ -40,14 +40,22 @@
          $('#msg').append("<h1>"+snapshot.val().message+"</h1>");
     })
 
+
+    function logout(clientId){
+        //window.location.href="/admin";
+        window.location="/api/logout/"+clientId;
+        return false;
+    }
+    
     </script>
 
     <!---------------------------------------->
     <h1>Client</h1>
     <h2>Your Id : <%=client.Id %></h2>
     <h1 id="msg"></h1>
-    <button><a href="/api/logout/<%=client.Id %>">Logout</a></button>
-
+    <button onclick="logout('<%=client.Id %>')">Logout</button>
+<!--    <button id="logout"><a href="/api/logout/<%=client.Id %>">Logout</a></button>
+-->
 </body>
 
 </html>

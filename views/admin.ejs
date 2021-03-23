@@ -38,14 +38,23 @@
         }
 
         //firestore.collection('activity').doc()
-        
-    
+        /*firebase.collection('activity').doc().onUpdate('value',(snapshot)=>{
+        alert('Hii');
+            //console.log(snapshot.val().message);
+         //$('#msg').append("<h1>"+snapshot.val().message+"</h1>");
+        })*/
+/*
+        firebase.firestore().collection("activity").doc()
+        .onSnapshot((doc) => {
+        console.log("Current data: ", doc.data());
+        });
+*/    
         </script>
 
     <!------------------------------->
     <h1>Admin</h1>
     <h2>Online Users </h2>
-    <!--<p><%=ActiveClients.length %></p>-->
+    <p><%=ActiveClients.length %></p>
     <% if(ActiveClients.length == 0){ %>
         <p>No client active!</p>
     <% } else {%>
