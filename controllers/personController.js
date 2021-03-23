@@ -1,26 +1,46 @@
 'use strict';
-
 const firebase = require('../db');
 const firestore = firebase.firestore();
 const Person = require('../models/person');
- 
-const addPerson = async (req, res, next) => {
-    try {
-        const data = req.body;
-        const docRef =await firestore.collection('person').doc();
-        console.log("Doc Id => "+docRef.id);
-        data.id=docRef.id;   //  Modifying id
-        data.role=req.params.role; //  Assigning role, Admin: 1, Client: 0. 
-        console.log("Added Person data => ", data);
-        await firestore.collection('person').doc(docRef.id).set(data);
-        //console.log(docRef.id);
-        res.send('Person Added Successfully!');
-    } catch (error) {
+const request = require('request');
+
+const displayAdminPage=async (req,res,next)=>{
+    try{
+        request({
+            url: 'http://localhost:8080/api/getAllActive',
+            method: 'GET',
+            json:{}
+        }, function(error, response, body){
+            if(error) res.status(400).send(error.message);
+            //console.log('error', error);
+            //console.log('response', response);
+            console.log('body=> ', body);
+            return res.render('admin',{ActiveClients:body});
+        });
+    }
+    catch(error){
         res.status(400).send(error.message);
     }
-}
+};
 
-module.exports = addPerson;
+
+const displayClientPage= async (req,res,next)=>{
+    try{
+        console.log(req.params.Id);
+        let client={
+            "Id":req.params.Id
+        };
+        return res.render('client',{client:client});
+    }
+    catch(error){
+        res.status(400).send(error.message);
+    }
+};
+
+module.exports = {
+    displayAdminPage,
+    displayClientPage
+};
 
 /*
 {

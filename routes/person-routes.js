@@ -1,9 +1,9 @@
 const express = require('express');
-const addPerson = require('../controllers/personController');
+const {displayAdminPage,displayClientPage} = require('../controllers/personController');
 const router = express.Router();
 
-router.post('/person/:role', addPerson);
-
+router.get('/admin',displayAdminPage); 
+router.get('/client/:Id',displayClientPage); 
 
 module.exports = {
     routes: router

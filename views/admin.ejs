@@ -43,11 +43,12 @@
     <!------------------------------->
     <h1>Admin</h1>
     <h2>Online Users </h2>
+    <p><%=ActiveClients.length %></p>
     <% if(ActiveClients.length == 0){ %>
         <p>No client active!</p>
-    <% } %>
+    <% } else {%>
     <% for(var i=0; i < ActiveClients.length; i++) { %>
         <p><%= ActiveClients[i].id %></p><button onclick="sendMessage('<%=ActiveClients[i].id%>');">Send Message</button>
-    <% } %>
+    <% } }%>
 </body>
 </html>
