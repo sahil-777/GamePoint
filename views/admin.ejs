@@ -6,12 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
 </head>
-<script>
-    function sendMessage(clientId){
-        alert(clientId);
-    }
-</script>
+ 
 <body>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+    
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDfno6KtYvtVPurAmukSg2ehzMrAPiPmBA",
+            authDomain: "gamepoint-fastapp.firebaseapp.com",
+            databaseURL: "https://gamepoint-fastapp-default-rtdb.firebaseio.com",
+            projectId: "gamepoint-fastapp",
+            storageBucket: "gamepoint-fastapp.appspot.com",
+            messagingSenderId: "288579400919",
+            appId: "1:288579400919:web:12fb45207cf36f5e092c92"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        function sendMessage(clientId){
+            let data={
+            "message":'Time Up!',
+            }
+    
+            firebase.database().ref(clientId).set(data);
+        }
+        
+    
+        </script>
+
+    <!------------------------------->
     <h1>Admin</h1>
     <h2>Online Users </h2>
     <% if(ActiveClients.length == 0){ %>
