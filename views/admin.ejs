@@ -12,6 +12,8 @@
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-functions.js"></script>
         <!-- TODO: Add SDKs for Firebase products that you want to use
             https://firebase.google.com/docs/web/setup#available-libraries -->
     
@@ -36,19 +38,7 @@
     
             firebase.database().ref(clientId).set(data);
         }
-
-        //firestore.collection('activity').doc()
-        /*firebase.collection('activity').doc().onUpdate('value',(snapshot)=>{
-        alert('Hii');
-            //console.log(snapshot.val().message);
-         //$('#msg').append("<h1>"+snapshot.val().message+"</h1>");
-        })*/
-/*
-        firebase.firestore().collection("activity").doc()
-        .onSnapshot((doc) => {
-        console.log("Current data: ", doc.data());
-        });
-*/    
+ 
         </script>
 
     <!------------------------------->

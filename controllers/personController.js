@@ -15,7 +15,7 @@ const displayAdminPage=async (req,res,next)=>{
             //console.log('error', error);
             //console.log('response', response);
             console.log('body=> ', body);
-            return res.render('admin',{ActiveClients:body});
+            return res.render('admin',{ActiveClients:body,firestore:firestore});
         });
     }
     catch(error){
